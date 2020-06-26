@@ -4,7 +4,6 @@ from bs4 import BeautifulSoup
 import csv
 import time
 
-
 def functionparse(response):
     print('HTTP GET: %s | Status code: %s' % (response.url, response.status_code))
     
@@ -28,25 +27,8 @@ def functionparse(response):
         })
     
     
-    urls.append(next_page)
-
-
-def export_csv(filename):
-    
-    with open(filename, 'w') as csv_file:
-        
-        writer = csv.DictWriter(csv_file, fieldnames=results[0].keys())
-        
-       
-        writer.writeheader()
-        
-        
-        for row in results:
-           
-            writer.writerow(row)
+    urls.append(findingnext_page)
             
-
-
 findpagenumber = 10
 urls = []
 results = []
@@ -61,4 +43,3 @@ for pagenum in range(0, findpagenumber):
     parse(findingnext_page)
     time.sleep(2)
 
-export_csv('newsfile.csv')
